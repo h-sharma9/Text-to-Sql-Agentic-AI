@@ -15,19 +15,28 @@ from dotenv import load_dotenv  # pyrefly: ignore[missing-import]
 # ---------------------------------------------------------------------------
 load_dotenv()
 
+# Fallback to Streamlit secrets when running on Streamlit Community Cloud
+_st_secrets = {}
+try:
+    import streamlit as _st
+    if hasattr(_st, "secrets"):
+        _st_secrets = dict(_st.secrets)
+except Exception:
+    pass
+
 # ---------------------------------------------------------------------------
 # Database configuration
 # ---------------------------------------------------------------------------
 DATABASE_URL: str = os.getenv(
     "DATABASE_URL",
-    "postgresql://postgres:password@localhost:5432/agentic_db",
+    _st_secrets.get("DATABASE_URL", "postgresql://postgres:password@localhost:5432/agentic_db")
 )
 
 # ---------------------------------------------------------------------------
 # LLM configuration (OpenAI / Groq auto-detection)
 # ---------------------------------------------------------------------------
-OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
-GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
+OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", _st_secrets.get("OPENAI_API_KEY", ""))
+GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", _st_secrets.get("GROQ_API_KEY", ""))
 
 # Prioritize Groq API key if provided or if OPENAI_API_KEY starts with gsk_
 API_KEY: str = GROQ_API_KEY or OPENAI_API_KEY
