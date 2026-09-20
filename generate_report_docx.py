@@ -190,9 +190,31 @@ def create_table(doc, headers, data, col_widths=None):
             for c_idx, w in enumerate(col_widths):
                 row.cells[c_idx].width = Inches(w)
 
-    p_space = doc.add_paragraph()
-    p_space.paragraph_format.space_before = Pt(0)
-    p_space.paragraph_format.space_after = Pt(6)
+def add_figure(doc, image_filename, caption_text, width_inches=5.8):
+    """Embeds an image from the screenshots/ directory with centered alignment and italicized caption."""
+    img_path = os.path.join(os.path.dirname(__file__), "screenshots", image_filename)
+    if not os.path.isfile(img_path):
+        img_path = os.path.join(os.path.dirname(__file__), image_filename)
+    
+    if os.path.isfile(img_path):
+        p_img = doc.add_paragraph()
+        p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_img.paragraph_format.space_before = Pt(8)
+        p_img.paragraph_format.space_after = Pt(2)
+        p_img.paragraph_format.keep_with_next = True
+        run_img = p_img.add_run()
+        run_img.add_picture(img_path, width=Inches(width_inches))
+
+        p_cap = doc.add_paragraph()
+        p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_cap.paragraph_format.space_before = Pt(2)
+        p_cap.paragraph_format.space_after = Pt(12)
+        p_cap.paragraph_format.keep_with_next = False
+        run_cap = p_cap.add_run(caption_text)
+        run_cap.font.name = "Calibri"
+        run_cap.font.size = Pt(9.5)
+        run_cap.font.italic = True
+        run_cap.font.color.rgb = RGBColor(0x55, 0x55, 0x55)
 
 def generate_report():
     doc = Document()
@@ -424,6 +446,12 @@ def generate_report():
         "interactive Plotly visualizations, generated SQL query inspection panels, and source-chunk citation audits. "
         "A standalone terminal CLI loop is also provided for headless batch evaluation and automated testing."
     )
+    add_figure(
+        doc,
+        "screenshot_dashboard.png",
+        "Figure 3.1: Streamlit Prototype Dashboard showing system status telemetry, model configuration, sample prompt controls, and conversational interface.",
+        width_inches=3.6
+    )
 
     # ---------------------------------------------------------
     # 4. EXPECTED INPUT & OUTPUT
@@ -477,6 +505,41 @@ def generate_report():
         ]
     ]
     create_table(doc, headers_io, data_io, col_widths=[1.8, 1.2, 2.0, 1.5])
+
+    format_heading_2(doc, "4.4 Prototype Execution Evidence & Screen Demonstrations")
+    add_body_paragraph(
+        doc,
+        "The figures below demonstrate the live execution of the dual-path agentic engine against the PostgreSQL relational database "
+        "and the FAISS vector store in our Streamlit prototype:"
+    )
+
+    format_heading_3(doc, "4.4.1 Text-to-SQL Relational Retrieval in Action")
+    add_body_paragraph(
+        doc,
+        "When prompted with an operational inquiry ('What are the top 5 product categories by number of orders?'), the supervisor routes "
+        "the request to the SQL Data Agent. The agent inspects the relational schema, crafts and executes a multi-table aggregation query, "
+        "and returns a structured ranking table with exact order frequencies:"
+    )
+    add_figure(
+        doc,
+        "screenshot_sql.png",
+        "Figure 4.1: Live Text-to-SQL Execution demonstrating prompt routing, SQL Data Agent badge, and structured order frequency breakdown.",
+        width_inches=6.0
+    )
+
+    format_heading_3(doc, "4.4.2 Document RAG Policy Retrieval with Citations")
+    add_body_paragraph(
+        doc,
+        "When prompted with a customer compliance inquiry ('What is the policy for returning a defective or damaged item?'), the router directs "
+        "the query to the Policy RAG Engine. The engine retrieves relevant policy passages from FAISS and synthesizes an authoritative answer "
+        "with exact section citations:"
+    )
+    add_figure(
+        doc,
+        "screenshot_rag.png",
+        "Figure 4.2: Live Document RAG Engine demonstrating policy query classification, grounded bullet-point resolution, and exact clause citation (Section 2: Defective or Damaged Goods).",
+        width_inches=6.0
+    )
 
     # ---------------------------------------------------------
     # 5. TOOLS & MODELS PLAN
@@ -534,6 +597,20 @@ def generate_report():
         ]
     ]
     create_table(doc, headers_tools, data_tools, col_widths=[1.4, 1.6, 1.4, 2.1])
+
+    format_heading_2(doc, "5.1 Automated System Verification & Test Suite Results")
+    add_body_paragraph(
+        doc,
+        "To guarantee execution safety and deterministic routing, the codebase incorporates a comprehensive automated test suite "
+        "implemented in Pytest. The suite covers SQL mutation gate validation (blocking dangerous DDL/DML), vector chunk retrieval accuracy, "
+        "and LangGraph state transitions:"
+    )
+    add_figure(
+        doc,
+        "screenshot_tests.png",
+        "Figure 5.1: Automated Verification Test Suite (Pytest) showing 100% pass rate (7/7 tests passed) across SQL security gates, vector chunking, and LangGraph routing.",
+        width_inches=6.0
+    )
 
     # ---------------------------------------------------------
     # 6. ONE THING YOU ARE CURRENTLY UNSURE ABOUT
