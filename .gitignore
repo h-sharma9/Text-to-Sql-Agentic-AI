@@ -1,0 +1,25 @@
+# Environment variables and credentials
+.env
+
+# Virtual environment
+agentic_sql_rag_env/
+venv/
+.venv/
+env/
+
+# Python cache & tests
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Large CSV datasets (data is already loaded in Neon Cloud PostgreSQL)
+data/*.csv
+
+# Editor / IDE configuration
+.vscode/
+.idea/
+
+# OS generated files
+Thumbs.db
+.DS_Store

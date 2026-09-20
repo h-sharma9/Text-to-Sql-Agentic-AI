@@ -1,0 +1,7 @@
+{
+  "venvPath": ".",
+  "venv": "agentic_sql_rag_env",
+  "extraPaths": [
+    "agentic_sql_rag_env/Lib/site-packages"
+  ]
+}

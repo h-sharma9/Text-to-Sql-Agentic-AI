@@ -1,0 +1,26 @@
+====================================================================
+OLIST E-COMMERCE PLATFORM: STORE POLICIES & SELLER FAQ
+====================================================================
+
+1. RETURN AND CANCELLATION POLICY ("RIGHT OF REGRET")
+- Under Brazilian Consumer Law (Article 49 of the CDC), buyers have the right to cancel an order and request a full refund within 7 days from the delivery date, without providing any justification.
+- Items must be returned unused, unopened, and in their original packaging with all included accessories and original tax invoice (Nota Fiscal).
+- Return shipping costs for eligible 7-day cancellations are fully covered by the platform.
+
+2. DEFECTIVE OR DAMAGED GOODS
+- If an item arrives damaged, defective, or incorrect, the customer must report the issue within 15 calendar days of receipt.
+- Once inspected and verified, the customer can choose between a full refund, store credit, or a direct replacement of the item.
+- Freight costs for defective or damaged returns are borne by the seller.
+
+3. REFUND PROCESSING TIMES
+- Credit Card Payments: Refunds are initiated within 3 business days of return inspection approval. Depending on the card issuer, the credit will reflect on the customer's next 1 to 2 billing cycles.
+- Boleto Bancário Payments: Refunds are deposited directly into the customer's designated bank account via wire transfer within 5 to 7 business days following inspection.
+
+4. SELLER SHIPPING AND DELIVERY SLA
+- Sellers are required to dispatch orders within 48 hours of payment authorization.
+- Estimated delivery times depend on distance and freight carrier routing across Brazilian states (e.g., SP, RJ, MG vs. Northern states like AM, PA).
+- If a package is delayed beyond 15 days past the estimated delivery date, the customer is eligible to request an automatic order cancellation and full refund.
+
+5. NON-REFUNDABLE ITEMS AND PROMOTIONAL SALES
+- Clearance, final sale, or customized items cannot be returned unless they arrive physically damaged or defective.
+- Digital gift cards and downloadable code vouchers are strictly non-refundable once issued.
