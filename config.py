@@ -32,6 +32,17 @@ DATABASE_URL: str = os.getenv(
     _st_secrets.get("DATABASE_URL", "postgresql://postgres:password@localhost:5432/agentic_db")
 )
 
+# Driver fallback: If postgresql:// is provided, check installed drivers to prevent 'No module named psycopg'
+if DATABASE_URL.startswith("postgresql://"):
+    try:
+        import psycopg
+    except ImportError:
+        try:
+            import psycopg2
+            DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg2://", 1)
+        except ImportError:
+            pass
+
 # ---------------------------------------------------------------------------
 # LLM configuration (OpenAI / Groq auto-detection)
 # ---------------------------------------------------------------------------
